@@ -35,6 +35,8 @@ jobs:
         run: |
           # Build for actual iOS devices (not simulator)
           npx eas build --platform ios --profile development --non-interactive --wait
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           
       - name: 📱 Create Enterprise Distribution Files
         run: |
