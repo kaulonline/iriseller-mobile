@@ -7,7 +7,6 @@
     "development": {
       "distribution": "internal",
       "node": "20.11.1",
-      "buildType": "release-build",
       "ios": {
         "simulator": false
       },
@@ -18,7 +17,6 @@
     "preview": {
       "distribution": "internal",
       "node": "20.11.1",
-      "buildType": "release-build",
       "ios": {
         "simulator": false
       },
@@ -32,7 +30,6 @@
     "enterprise": {
       "distribution": "internal",
       "node": "20.11.1",
-      "buildType": "release-build",
       "ios": {
         "simulator": false,
         "enterpriseProvisioning": "adhoc"
