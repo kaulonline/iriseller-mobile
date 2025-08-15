@@ -71,19 +71,15 @@
       ]
     ],
     "extra": {
+      "supportsTablet": true,
       "eas": {
-        "projectId": "YOUR_EAS_PROJECT_ID"
-      },
-      "supportsTablet": true
+        "projectId": "9b135dd1-af08-422e-9c22-f3c3e471e0b0"
+      }
     },
     "scheme": "iriseller",
-    "owner": "iriseller",
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/YOUR_EAS_PROJECT_ID"
-    },
     "runtimeVersion": {
       "policy": "sdkVersion"
-    }
+    },
+    "owner": "iriseller"
   }
 }
