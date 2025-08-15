@@ -6,8 +6,10 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "node": "20.11.1",
+      "npm": {},
       "ios": {
-        "simulator": true
+        "simulator": false
       },
       "android": {
         "buildType": "apk"
@@ -27,6 +29,8 @@
     },
     "enterprise": {
       "distribution": "internal",
+      "node": "20.11.1",
+      "npm": {},
       "ios": {
         "simulator": false,
         "enterpriseProvisioning": "adhoc"
