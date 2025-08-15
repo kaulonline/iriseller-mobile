@@ -1,0 +1,8 @@
+{
+  "name": "IRISeller",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "03ee27e2"
+}

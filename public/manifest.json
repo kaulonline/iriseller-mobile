@@ -1,0 +1,28 @@
+{
+  "name": "IRISeller - AI Sales Intelligence Platform",
+  "short_name": "IRISeller",
+  "description": "Intelligent CRM insights and AI-powered sales analytics",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06868D",
+  "theme_color": "#06868D",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "scope": "/"
+}

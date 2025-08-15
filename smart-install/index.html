@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06868D">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="IRISeller">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/icon.png">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="IRISeller - AI Sales Intelligence Platform">
+    <meta property="og:description" content="Intelligent CRM insights and AI-powered sales analytics">
+    <meta property="og:image" content="https://app.iriseller.com/assets/icon.png">
+    <meta property="og:url" content="https://app.iriseller.com">
+    
+    <title>IRISeller - Get the App</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #06868D 0%, #265E5A 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 18px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #06868D;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .install-section {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .install-section.active {
+            display: block;
+        }
+        
+        .install-btn {
+            background: white;
+            color: #06868D;
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .install-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .install-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        
+        .qr-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 200px;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .device-info {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .install-btn {
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">IR</div>
+        <h1>IRISeller</h1>
+        <p class="subtitle">AI Sales Intelligence Platform</p>
+        
+        <!-- iOS Installation -->
+        <div id="ios-install" class="install-section">
+            <h2>📱 Install on iPhone</h2>
+            <button class="install-btn" onclick="showIOSInstructions()">
+                🍎 Add to Home Screen
+            </button>
+            <div id="ios-instructions" class="instructions" style="display: none;">
+                <strong>How to install:</strong>
+                <ol>
+                    <li>Tap the <strong>Share</strong> button below ⬇️</li>
+                    <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                    <li>Tap <strong>"Add"</strong> to confirm</li>
+                    <li>IRISeller app will appear on your home screen!</li>
+                </ol>
+            </div>
+            <button class="install-btn secondary" onclick="openWebApp()">
+                🌐 Open Web App
+            </button>
+        </div>
+        
+        <!-- Android Installation -->
+        <div id="android-install" class="install-section">
+            <h2>🤖 Install on Android</h2>
+            <button class="install-btn" id="android-install-btn" onclick="installAndroidPWA()">
+                📱 Install App
+            </button>
+            <div id="android-instructions" class="instructions" style="display: none;">
+                <strong>How to install:</strong>
+                <ol>
+                    <li>Look for the <strong>"Install"</strong> prompt in your browser</li>
+                    <li>Or tap the <strong>⋮ menu</strong> → <strong>"Add to Home screen"</strong></li>
+                    <li>Tap <strong>"Install"</strong> to confirm</li>
+                    <li>IRISeller app will be installed like any other app!</li>
+                </ol>
+            </div>
+            <button class="install-btn secondary" onclick="openWebApp()">
+                🌐 Open Web App
+            </button>
+        </div>
+        
+        <!-- Desktop -->
+        <div id="desktop-install" class="install-section">
+            <h2>💻 Access IRISeller</h2>
+            <button class="install-btn" onclick="openWebApp()">
+                🌐 Open Web App
+            </button>
+            <button class="install-btn secondary" onclick="showQRCode()">
+                📱 Scan QR for Mobile
+            </button>
+            <div id="qr-section" class="qr-section" style="display: none;">
+                <p>Scan with your phone camera:</p>
+                <div class="qr-code">
+                    <div id="qr-placeholder" style="width: 160px; height: 160px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666;">
+                        📱 QR Code
+                    </div>
+                </div>
+                <p style="font-size: 12px; opacity: 0.8;">Or visit: app.iriseller.com</p>
+            </div>
+        </div>
+        
+        <!-- Loading -->
+        <div id="loading" class="install-section active">
+            <div class="loading"></div>
+            <p style="margin-top: 20px;">Detecting your device...</p>
+        </div>
+        
+        <!-- Device Info (for debugging) -->
+        <div class="device-info" id="device-info"></div>
+    </div>
+
+    <script>
+        // Device Detection
+        function detectDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const platform = navigator.platform.toLowerCase();
+            
+            const isIOS = /ipad|iphone|ipod/.test(userAgent) || 
+                         (platform === 'macintel' && navigator.maxTouchPoints > 1);
+            const isAndroid = /android/.test(userAgent);
+            const isMobile = /mobile|tablet|android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+            
+            const deviceInfo = {
+                isIOS,
+                isAndroid,
+                isMobile,
+                isDesktop: !isMobile,
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                standalone: window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches
+            };
+            
+            // Debug info
+            document.getElementById('device-info').innerHTML = `
+                Device: ${isIOS ? 'iOS' : isAndroid ? 'Android' : 'Desktop'} | 
+                Standalone: ${deviceInfo.standalone ? 'Yes' : 'No'}
+            `;
+            
+            return deviceInfo;
+        }
+        
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show Android install button
+            const androidBtn = document.getElementById('android-install-btn');
+            if (androidBtn) {
+                androidBtn.innerHTML = '📱 Install App';
+                androidBtn.style.display = 'block';
+            }
+        });
+        
+        // Install Functions
+        function installAndroidPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                showAndroidInstructions();
+            }
+        }
+        
+        function showIOSInstructions() {
+            const instructions = document.getElementById('ios-instructions');
+            instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function showAndroidInstructions() {
+            const instructions = document.getElementById('android-instructions');
+            instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function openWebApp() {
+            // For PWA users, this should open in the installed app
+            window.location.href = 'https://app.iriseller.com/app';
+        }
+        
+        function showQRCode() {
+            const qrSection = document.getElementById('qr-section');
+            qrSection.style.display = qrSection.style.display === 'none' ? 'block' : 'none';
+            
+            // You can replace this with actual QR code generation
+            if (qrSection.style.display === 'block') {
+                // Generate QR code for https://app.iriseller.com
+                generateQRCode('https://app.iriseller.com');
+            }
+        }
+        
+        function generateQRCode(url) {
+            // Simple QR code placeholder - you can integrate with QR.js or similar
+            const qrPlaceholder = document.getElementById('qr-placeholder');
+            qrPlaceholder.innerHTML = `
+                <div style="font-size: 10px; text-align: center; line-height: 1.2;">
+                    QR Code<br/>
+                    <small>${url}</small>
+                </div>
+            `;
+        }
+        
+        // Initialize App
+        function initializeApp() {
+            setTimeout(() => {
+                const device = detectDevice();
+                
+                // Hide loading
+                document.getElementById('loading').classList.remove('active');
+                
+                // Check if already installed/standalone
+                if (device.standalone) {
+                    openWebApp();
+                    return;
+                }
+                
+                // Show appropriate install section
+                if (device.isIOS) {
+                    document.getElementById('ios-install').classList.add('active');
+                } else if (device.isAndroid) {
+                    document.getElementById('android-install').classList.add('active');
+                } else {
+                    document.getElementById('desktop-install').classList.add('active');
+                }
+            }, 1500);
+        }
+        
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered:', registration))
+                    .catch(registrationError => console.log('SW registration failed:', registrationError));
+            });
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeApp);
+        
+        // Handle app installed
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('App was installed');
+            openWebApp();
+        });
+    </script>
+</body>
+</html>

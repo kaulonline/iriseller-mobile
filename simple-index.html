@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06868D">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="IRISeller">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/icon.png">
+    
+    <title>IRISeller - Get the App</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #06868D 0%, #265E5A 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 18px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #06868D;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .install-btn {
+            background: white;
+            color: #06868D;
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            margin: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .install-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: left;
+        }
+        
+        .device-info {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">IR</div>
+        <h1>IRISeller</h1>
+        <p class="subtitle">AI Sales Intelligence Platform</p>
+        
+        <div id="install-content">
+            <div id="ios-section" style="display: none;">
+                <h2>📱 Install on iPhone</h2>
+                <button class="install-btn" onclick="showIOSInstructions()">
+                    🍎 Add to Home Screen
+                </button>
+                <div id="ios-instructions" class="instructions" style="display: none;">
+                    <strong>How to install:</strong>
+                    <ol>
+                        <li>Tap the <strong>Share</strong> button in Safari</li>
+                        <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                        <li>Tap <strong>"Add"</strong> to confirm</li>
+                        <li>IRISeller will appear on your home screen!</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="android-section" style="display: none;">
+                <h2>🤖 Install on Android</h2>
+                <button class="install-btn" onclick="installPWA()">
+                    📱 Install App
+                </button>
+                <div id="android-instructions" class="instructions" style="display: none;">
+                    <strong>How to install:</strong>
+                    <ol>
+                        <li>Look for "Install" prompt in your browser</li>
+                        <li>Or tap browser menu → "Add to Home screen"</li>
+                        <li>Tap "Install" to confirm</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div id="desktop-section" style="display: none;">
+                <h2>💻 Access IRISeller</h2>
+                <a href="/app/" class="install-btn">🌐 Open Web App</a>
+            </div>
+        </div>
+        
+        <a href="/app/" class="install-btn secondary">🚀 Launch IRISeller</a>
+        
+        <div class="device-info" id="device-info"></div>
+    </div>
+
+    <script>
+        // Simple device detection without complex service worker
+        function detectDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isIOS = /ipad|iphone|ipod/.test(userAgent);
+            const isAndroid = /android/.test(userAgent);
+            const isMobile = /mobile|tablet/.test(userAgent);
+            
+            return { isIOS, isAndroid, isMobile, isDesktop: !isMobile };
+        }
+        
+        function showContent() {
+            const device = detectDevice();
+            
+            document.getElementById('device-info').textContent = 
+                `Device: ${device.isIOS ? 'iOS' : device.isAndroid ? 'Android' : 'Desktop'}`;
+            
+            if (device.isIOS) {
+                document.getElementById('ios-section').style.display = 'block';
+            } else if (device.isAndroid) {
+                document.getElementById('android-section').style.display = 'block';
+            } else {
+                document.getElementById('desktop-section').style.display = 'block';
+            }
+        }
+        
+        function showIOSInstructions() {
+            const instructions = document.getElementById('ios-instructions');
+            instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        function installPWA() {
+            const instructions = document.getElementById('android-instructions');
+            instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Initialize without service worker for now
+        document.addEventListener('DOMContentLoaded', showContent);
+    </script>
+</body>
+</html>
