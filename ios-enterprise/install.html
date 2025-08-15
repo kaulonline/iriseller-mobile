@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install IRISeller iOS App</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            padding: 20px; 
+            text-align: center; 
+            background: linear-gradient(135deg, #06868D, #265E5A); 
+            color: white; 
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container { 
+            max-width: 400px; 
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .logo { 
+            width: 100px; 
+            height: 100px; 
+            background: white; 
+            border-radius: 20px; 
+            margin: 0 auto 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 24px; 
+            color: #06868D; 
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        h1 { margin: 20px 0 10px; font-size: 28px; }
+        .subtitle { font-size: 16px; opacity: 0.9; margin-bottom: 30px; }
+        .install-btn { 
+            background: white; 
+            color: #06868D; 
+            padding: 18px 40px; 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            text-decoration: none; 
+            display: inline-block; 
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .install-btn:hover { 
+            background: #f0f0f0; 
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .instructions { 
+            margin-top: 30px; 
+            font-size: 14px; 
+            opacity: 0.9;
+            text-align: left;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .instructions h3 { margin: 0 0 15px; text-align: center; }
+        .instructions ol { margin: 10px 0; padding-left: 20px; }
+        .instructions li { margin: 8px 0; }
+        .footer { 
+            margin-top: 30px; 
+            font-size: 12px; 
+            opacity: 0.7;
+        }
+        .status { 
+            background: rgba(46, 229, 234, 0.2); 
+            border-radius: 8px; 
+            padding: 10px; 
+            margin: 20px 0; 
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">IRIS</div>
+        <h1>IRISeller</h1>
+        <div class="subtitle">AI-Powered Sales Intelligence Platform</div>
+        
+        <div class="status">
+            🚀 <strong>Enterprise Distribution</strong><br>
+            Direct install • No App Store required
+        </div>
+        
+        <a href="itms-services://?action=download-manifest&url=https://app.iriseller.com/ios-enterprise/manifest.plist" 
+           class="install-btn" id="installBtn">
+            📱 Install on iPhone
+        </a>
+        
+        <div class="instructions">
+            <h3>📋 Installation Steps</h3>
+            <ol>
+                <li><strong>Tap "Install on iPhone"</strong> above</li>
+                <li><strong>Allow installation</strong> when iOS prompts</li>
+                <li><strong>Trust developer:</strong> Settings > General > VPN & Device Management</li>
+                <li><strong>Launch IRISeller</strong> from your home screen</li>
+                <li><strong>Login:</strong> jchen@iriseller.com / Password123</li>
+            </ol>
+            
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3);">
+                <strong>⚠️ Important:</strong> This only works on iPhones/iPads with iOS 15.1+
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>Version 1.0.0 • Enterprise Distribution</div>
+            <div style="margin-top: 5px;">Contact: support@iriseller.com</div>
+        </div>
+    </div>
+    
+    <script>
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const installBtn = document.getElementById('installBtn');
+        
+        if (!isIOS) {
+            installBtn.style.background = '#ccc';
+            installBtn.style.color = '#666';
+            installBtn.innerHTML = '📱 iOS Device Required';
+            installBtn.onclick = function(e) {
+                e.preventDefault();
+                alert('This app can only be installed on iPhone or iPad devices.');
+            };
+        }
+    </script>
+</body>
+</html>
