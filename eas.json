@@ -1,14 +1,15 @@
 {
   "cli": {
-    "version": ">= 3.0.0"
+    "version": ">= 3.0.0",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
-      "developmentClient": true,
       "distribution": "internal",
       "node": "20.11.1",
       "ios": {
-        "simulator": false
+        "simulator": false,
+        "bundleIdentifier": "com.iriseller.mobile"
       },
       "android": {
         "buildType": "apk"
