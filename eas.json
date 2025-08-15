@@ -8,8 +8,7 @@
       "distribution": "internal",
       "node": "20.11.1",
       "ios": {
-        "simulator": false,
-        "bundleIdentifier": "com.iriseller.mobile"
+        "simulator": false
       },
       "android": {
         "buildType": "apk"
