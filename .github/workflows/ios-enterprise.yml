@@ -34,7 +34,7 @@ jobs:
       - name: 🍎 Build iOS Device .ipa
         run: |
           # Build for actual iOS devices (not simulator) - managed workflow
-          npx eas build --platform ios --profile development --non-interactive --wait
+          npx eas build --platform ios --profile enterprise --non-interactive --wait
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
           
