@@ -7,7 +7,6 @@
       "developmentClient": true,
       "distribution": "internal",
       "node": "20.11.1",
-      "npm": {},
       "ios": {
         "simulator": false
       },
@@ -30,7 +29,6 @@
     "enterprise": {
       "distribution": "internal",
       "node": "20.11.1",
-      "npm": {},
       "ios": {
         "simulator": false,
         "enterpriseProvisioning": "adhoc"
