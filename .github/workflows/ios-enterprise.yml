@@ -1,0 +1,126 @@
+name: iOS Enterprise Build & Distribution
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build-and-distribute:
+    runs-on: macos-latest
+    
+    steps:
+      - name: 🏗 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🏗 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - name: 🏗 Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🍎 Build iOS Device .ipa
+        run: |
+          # Build for actual iOS devices (not simulator)
+          eas build --platform ios --profile production --non-interactive --wait
+          
+      - name: 📱 Create Enterprise Distribution Files
+        run: |
+          mkdir -p enterprise-dist
+          
+          # Create manifest.plist for enterprise distribution
+          cat > enterprise-dist/manifest.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>items</key>
+              <array>
+                  <dict>
+                      <key>assets</key>
+                      <array>
+                          <dict>
+                              <key>kind</key>
+                              <string>software-package</string>
+                              <key>url</key>
+                              <string>https://your-domain.com/IRISeller.ipa</string>
+                          </dict>
+                      </array>
+                      <key>metadata</key>
+                      <dict>
+                          <key>bundle-identifier</key>
+                          <string>com.iriseller.mobile</string>
+                          <key>bundle-version</key>
+                          <string>1.0.0</string>
+                          <key>kind</key>
+                          <string>software</string>
+                          <key>title</key>
+                          <string>IRISeller</string>
+                      </dict>
+                  </dict>
+              </array>
+          </dict>
+          </plist>
+          EOF
+          
+          # Create install page
+          cat > enterprise-dist/install.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Install IRISeller</title>
+              <style>
+                  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 20px; text-align: center; background: #06868D; color: white; }
+                  .container { max-width: 400px; margin: 50px auto; }
+                  .install-btn { background: white; color: #06868D; padding: 15px 30px; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; text-decoration: none; display: inline-block; margin: 20px 0; }
+                  .install-btn:hover { background: #f0f0f0; }
+                  .logo { width: 100px; height: 100px; background: white; border-radius: 20px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #06868D; font-weight: bold; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <div class="logo">IRIS</div>
+                  <h1>IRISeller iOS App</h1>
+                  <p>AI-Powered Sales Intelligence Platform</p>
+                  
+                  <a href="itms-services://?action=download-manifest&url=https://your-domain.com/manifest.plist" class="install-btn">
+                      📱 Install on iPhone
+                  </a>
+                  
+                  <div style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+                      <p><strong>Instructions:</strong></p>
+                      <p>1. Tap "Install on iPhone" button</p>
+                      <p>2. Allow installation when prompted</p>
+                      <p>3. Trust the developer in Settings > General > Profiles</p>
+                      <p>4. Launch IRISeller from home screen</p>
+                  </div>
+                  
+                  <div style="margin-top: 20px; font-size: 12px; opacity: 0.6;">
+                      <p>Requires iOS 15.1 or later</p>
+                      <p>Enterprise Distribution - No App Store Required</p>
+                  </div>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: 📦 Upload Enterprise Distribution
+        uses: actions/upload-artifact@v4
+        with:
+          name: IRISeller-Enterprise-iOS
+          path: |
+            *.ipa
+            enterprise-dist/
+          retention-days: 90
